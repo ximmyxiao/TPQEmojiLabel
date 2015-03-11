@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EmojiManager.h"
 
-@interface TPQEmojiLabel : UILabel
+@interface TPQEmojiLabel : UITextView
 @property(nonatomic,strong) NSString* emojiText;
+@property(nonatomic,strong) NSMutableArray* linksRangeArray;
+@property(nonatomic,strong) NSMutableArray* linksUrlArray;
+- (NSString*)linksForCharacterIndex:(NSInteger) index;
 @end

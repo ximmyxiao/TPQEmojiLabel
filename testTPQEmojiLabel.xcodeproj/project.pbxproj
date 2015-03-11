@@ -120,6 +120,12 @@
 		990038401A355BF200CB9166 /* Expression_98@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990037D71A355BF200CB9166 /* Expression_98@2x.png */; };
 		990038411A355BF200CB9166 /* Expression_99@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990037D81A355BF200CB9166 /* Expression_99@2x.png */; };
 		990038421A355BF200CB9166 /* Expression_9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990037D91A355BF200CB9166 /* Expression_9@2x.png */; };
+		9993D70E1AAE858900936CCD /* TPQEmojiLabelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993D70D1AAE858900936CCD /* TPQEmojiLabelV2.m */; };
+		9993D7121AAE95D800936CCD /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993D7101AAE95D800936CCD /* TableViewCell.m */; };
+		9993D7131AAE95D800936CCD /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9993D7111AAE95D800936CCD /* TableViewCell.xib */; };
+		9993D7151AAEFB7300936CCD /* EmojiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993D7141AAEFB7300936CCD /* EmojiManager.m */; };
+		9993D71A1AAEFFF900936CCD /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993D7181AAEFFF900936CCD /* WebViewController.m */; };
+		9993D71B1AAEFFF900936CCD /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9993D7191AAEFFF900936CCD /* WebViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -253,6 +259,16 @@
 		990037D71A355BF200CB9166 /* Expression_98@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_98@2x.png"; sourceTree = "<group>"; };
 		990037D81A355BF200CB9166 /* Expression_99@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_99@2x.png"; sourceTree = "<group>"; };
 		990037D91A355BF200CB9166 /* Expression_9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_9@2x.png"; sourceTree = "<group>"; };
+		9993D70C1AAE858900936CCD /* TPQEmojiLabelV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPQEmojiLabelV2.h; path = emoji/TPQEmojiLabelV2.h; sourceTree = "<group>"; };
+		9993D70D1AAE858900936CCD /* TPQEmojiLabelV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPQEmojiLabelV2.m; path = emoji/TPQEmojiLabelV2.m; sourceTree = "<group>"; };
+		9993D70F1AAE95D800936CCD /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewCell.h; path = testTPQEmojiLabel/TableViewCell.h; sourceTree = SOURCE_ROOT; };
+		9993D7101AAE95D800936CCD /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewCell.m; path = testTPQEmojiLabel/TableViewCell.m; sourceTree = SOURCE_ROOT; };
+		9993D7111AAE95D800936CCD /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableViewCell.xib; path = testTPQEmojiLabel/TableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		9993D7141AAEFB7300936CCD /* EmojiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiManager.m; sourceTree = "<group>"; };
+		9993D7161AAEFB8200936CCD /* EmojiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmojiManager.h; sourceTree = "<group>"; };
+		9993D7171AAEFFF900936CCD /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		9993D7181AAEFFF900936CCD /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		9993D7191AAEFFF900936CCD /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +292,8 @@
 		9900373B1A3540F300CB9166 = {
 			isa = PBXGroup;
 			children = (
+				9993D7161AAEFB8200936CCD /* EmojiManager.h */,
+				9993D7141AAEFB7300936CCD /* EmojiManager.m */,
 				990037461A3540F300CB9166 /* testTPQEmojiLabel */,
 				990037601A3540F300CB9166 /* testTPQEmojiLabelTests */,
 				990037451A3540F300CB9166 /* Products */,
@@ -299,12 +317,20 @@
 				9900374C1A3540F300CB9166 /* AppDelegate.m */,
 				9900374E1A3540F300CB9166 /* ViewController.h */,
 				9900374F1A3540F300CB9166 /* ViewController.m */,
+				9993D70C1AAE858900936CCD /* TPQEmojiLabelV2.h */,
+				9993D70D1AAE858900936CCD /* TPQEmojiLabelV2.m */,
+				9993D70F1AAE95D800936CCD /* TableViewCell.h */,
+				9993D7101AAE95D800936CCD /* TableViewCell.m */,
+				9993D7111AAE95D800936CCD /* TableViewCell.xib */,
 				990037511A3540F300CB9166 /* Main.storyboard */,
 				990037541A3540F300CB9166 /* Images.xcassets */,
 				990037561A3540F300CB9166 /* LaunchScreen.xib */,
 				990037471A3540F300CB9166 /* Supporting Files */,
 				9900376D1A35413400CB9166 /* TPQEmojiLabel.h */,
 				9900376E1A35413400CB9166 /* TPQEmojiLabel.m */,
+				9993D7171AAEFFF900936CCD /* WebViewController.h */,
+				9993D7181AAEFFF900936CCD /* WebViewController.m */,
+				9993D7191AAEFFF900936CCD /* WebViewController.xib */,
 			);
 			path = testTPQEmojiLabel;
 			sourceTree = "<group>";
@@ -590,6 +616,7 @@
 				990038261A355BF200CB9166 /* Expression_74@2x.png in Resources */,
 				990037E81A355BF200CB9166 /* Expression_18@2x.png in Resources */,
 				9900380E1A355BF200CB9166 /* Expression_52@2x.png in Resources */,
+				9993D71B1AAEFFF900936CCD /* WebViewController.xib in Resources */,
 				990037E41A355BF200CB9166 /* Expression_14@2x.png in Resources */,
 				9900382D1A355BF200CB9166 /* Expression_80@2x.png in Resources */,
 				990037FC1A355BF200CB9166 /* Expression_36@2x.png in Resources */,
@@ -600,6 +627,7 @@
 				990038341A355BF200CB9166 /* Expression_87@2x.png in Resources */,
 				9900383D1A355BF200CB9166 /* Expression_95@2x.png in Resources */,
 				990037531A3540F300CB9166 /* Main.storyboard in Resources */,
+				9993D7131AAE95D800936CCD /* TableViewCell.xib in Resources */,
 				9900383B1A355BF200CB9166 /* Expression_93@2x.png in Resources */,
 				990037E61A355BF200CB9166 /* Expression_16@2x.png in Resources */,
 				990038281A355BF200CB9166 /* Expression_76@2x.png in Resources */,
@@ -652,8 +680,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9993D70E1AAE858900936CCD /* TPQEmojiLabelV2.m in Sources */,
+				9993D7121AAE95D800936CCD /* TableViewCell.m in Sources */,
 				990037501A3540F300CB9166 /* ViewController.m in Sources */,
+				9993D71A1AAEFFF900936CCD /* WebViewController.m in Sources */,
 				9900374D1A3540F300CB9166 /* AppDelegate.m in Sources */,
+				9993D7151AAEFB7300936CCD /* EmojiManager.m in Sources */,
 				9900374A1A3540F300CB9166 /* main.m in Sources */,
 				9900376F1A35413400CB9166 /* TPQEmojiLabel.m in Sources */,
 			);
@@ -846,6 +878,7 @@
 				990037691A3540F300CB9166 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9900376A1A3540F300CB9166 /* Build configuration list for PBXNativeTarget "testTPQEmojiLabelTests" */ = {
 			isa = XCConfigurationList;
@@ -854,6 +887,7 @@
 				9900376C1A3540F300CB9166 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,61 +1,105 @@
 //
-//  TPQEmojiLabel.m
+//  TPQEmojiLabelV2.m
 //  testTPQEmojiLabel
 //
-//  Created by Piao Piao on 14/12/8.
-//  Copyright (c) 2014年 Piao Piao. All rights reserved.
+//  Created by Piao Piao on 15/3/10.
+//  Copyright (c) 2015年 Piao Piao. All rights reserved.
 //
 
-#import "TPQEmojiLabel.h"
+#import "TPQEmojiLabelV2.h"
 #import "EmojiManager.h"
 
 
+@interface TPQEmojiLabelV2()
+@property(nonatomic,strong) NSDictionary* vs;
+@property(nonatomic,strong) NSLayoutConstraint* textViewHeightConstraint;
+@property(nonatomic,strong) NSMutableArray* constraints;
+@end
 
+@implementation TPQEmojiLabelV2
 
-
-
-
-
-
-@implementation TPQEmojiLabel
 /*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        self.userInteractionEnabled = NO;
+        [self commonInit];
     }
+    
     return self;
 }
+
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.userInteractionEnabled = NO;
+        [self commonInit];
     }
+    
     return self;
 }
-- (void)setEmojiText:(NSString *)emojiText
+
+
+- (void)commonInit
 {
-    _emojiText = emojiText;
-    [self generateAttributeString:emojiText];
+    
+    NSTextContainer* container = [[NSTextContainer alloc] initWithSize:self.bounds.size];
+    self.textView = [[UITextView alloc] initWithFrame:self.bounds];
+    self.textView.backgroundColor = [UIColor redColor];
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.textView.userInteractionEnabled = NO;
+    [self addSubview:self.textView];
+    self.vs = NSDictionaryOfVariableBindings(_textView);
+
+
+//    [self.textView addConstraint:self.textViewHeightConstraint];
 }
+
+
+- (void)updateConstraints
+{
+    [self removeConstraints:self.constraints];
+    self.constraints = [NSMutableArray array];
+    NSArray* HConstrains = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textView]|" options:0 metrics:nil views:self.vs];
+    [self addConstraints:HConstrains];
+    [self.constraints addObjectsFromArray:HConstrains];
+    NSArray* VConstrains = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textView]|" options:0 metrics:nil views:self.vs];
+    [self addConstraints:VConstrains];
+    [self.constraints addObjectsFromArray:VConstrains];
+
+    self.textViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.textView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:10];
+    [super updateConstraints];
+}
+
+- (void)setTextContent:(NSString *)textContent
+{
+    _textContent = textContent;
+    
+    [self generateAttributeString:textContent];
+    
+    [self invalidateIntrinsicContentSize];
+    [self setNeedsUpdateConstraints];
+    [self setNeedsLayout];
+    
+}
+
+
 
 - (void)generateAttributeString:(NSString *)emojiText
 {
     if ([emojiText length] == 0)
     {
-        self.attributedText = nil;
+        self.textView.attributedText = nil;
     }
     
     self.linksRangeArray = [NSMutableArray array];
@@ -90,7 +134,7 @@
                 
                 [self.linksRangeArray addObject:[NSValue valueWithRange:NSMakeRange([string length] + urlResult.range.location, urlResult.range.length)]];
                 [self.linksUrlArray addObject:[normalString substringWithRange:urlResult.range]];
-
+                
             }
             
             [string insertAttributedString:normalAttributeString atIndex:[string length]];
@@ -176,17 +220,53 @@
     
     NSDictionary* attri = @{NSFontAttributeName:[UIFont systemFontOfSize:17]};
     [string addAttributes:attri range:NSMakeRange(0, [string length])];
-    self.attributedText = string;
+    self.textView.attributedText = string;
+    
+}
+
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+//    [self.textView removeConstraint:self.textViewHeightConstraint];
+//    
+//    CGSize size = [self.textView sizeThatFits:CGSizeMake(self.textView.frame.size.width, MAXFLOAT)];
+//    self.textViewHeightConstraint.constant = size.height;
+//    [self.textView addConstraint:self.textViewHeightConstraint];
 
 }
 
-//- (CGSize)intrinsicContentSize
-//{
-//    NSLog(@"size prefer is :%f",self.preferredMaxLayoutWidth);
-//    CGSize size = [super intrinsicContentSize];
-//    NSLog(@"size is %@--content:%@",NSStringFromCGSize(size),self.emojiText);
-//    return size;
-//}
+- (CGSize)intrinsicContentSize
+{
+    CGSize size = [self.textView sizeThatFits:CGSizeMake(self.textView.frame.size.width, MAXFLOAT)];
+
+    return CGSizeMake(self.bounds.size.width, size.height);
+}
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"touches begin");
+    
+    
+    UITouch* touch = [touches anyObject];
+    CGPoint point =  [touch locationInView:self];
+    point = CGPointMake(point.x - self.textView.textContainerInset.left, point.y - self.textView.textContainerInset.top);
+    NSLog(@"point :%@",NSStringFromCGPoint(point));
+    NSLog(@"length:%d",[self.textView.attributedText length]);
+    NSInteger index = [self.textView.layoutManager characterIndexForPoint:point inTextContainer:self.textView.textContainer  fractionOfDistanceBetweenInsertionPoints:NULL];
+    NSLog(@"index :%d",index);
+    
+    NSString*url = [self linksForCharacterIndex:index];
+    if ([url length] > 0)
+    {
+        if ([self.urlClickDelegate respondsToSelector:@selector(didSelectUrl:)])
+        {
+            [self.urlClickDelegate didSelectUrl:url];
+        }
+    }
+}
 
 - (NSString*)linksForCharacterIndex:(NSInteger) index
 {
@@ -203,22 +283,5 @@
     }
     return @"";
 }
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    CGSize size = [self sizeThatFits:CGSizeMake(self.frame.size.width, MAXFLOAT)];
-    NSLog(@"self:%@ :fit size:%@",NSStringFromCGRect(self.frame),NSStringFromCGSize(size))  ;
-    
-//    if (self.heightConstraint)
-//    {
-//        [self removeConstraint:self.heightConstraint];
-//    }
-//    
-//    self.heightConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:2 constant:size.height];
-//    [self addConstraint:self.heightConstraint];
-//    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y , self.frame.size.width, size.height);
-}
-
 
 @end
