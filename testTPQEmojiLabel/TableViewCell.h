@@ -10,6 +10,6 @@
 #import "TPQEmojiLabelV2.h"
 
 @interface TableViewCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet TPQEmojiLabelV2 *emojiLabel;
+@property (strong, nonatomic) TPQEmojiLabelV2 *emojiLabel;
 
 @end

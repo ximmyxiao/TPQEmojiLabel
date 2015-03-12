@@ -50,10 +50,20 @@
 }
 
 
+- (void)updateHeightConstraint
+{
+    [self.textView removeConstraint:self.textViewHeightConstraint];
+    CGFloat height = [self.textView sizeThatFits:CGSizeMake(self.textView.bounds.size.width, MAXFLOAT)].height;
+    self.textViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.textView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:height];
+    
+    [self.textView addConstraint:self.textViewHeightConstraint];
+
+}
+
+
 - (void)commonInit
 {
     
-    NSTextContainer* container = [[NSTextContainer alloc] initWithSize:self.bounds.size];
     self.textView = [[UITextView alloc] initWithFrame:self.bounds];
     self.textView.backgroundColor = [UIColor redColor];
     self.textView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -62,7 +72,6 @@
     self.vs = NSDictionaryOfVariableBindings(_textView);
 
 
-//    [self.textView addConstraint:self.textViewHeightConstraint];
 }
 
 
@@ -77,7 +86,6 @@
     [self addConstraints:VConstrains];
     [self.constraints addObjectsFromArray:VConstrains];
 
-    self.textViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.textView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:10];
     [super updateConstraints];
 }
 
@@ -224,11 +232,13 @@
     
 }
 
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    NSLog(@"layoutSubviews: self:%@",NSStringFromCGRect(self.frame) );
     
+    [self updateHeightConstraint];
+    [super layoutSubviews];
 //    [self.textView removeConstraint:self.textViewHeightConstraint];
 //    
 //    CGSize size = [self.textView sizeThatFits:CGSizeMake(self.textView.frame.size.width, MAXFLOAT)];
@@ -239,9 +249,10 @@
 
 - (CGSize)intrinsicContentSize
 {
-    CGSize size = [self.textView sizeThatFits:CGSizeMake(self.textView.frame.size.width, MAXFLOAT)];
-
-    return CGSizeMake(self.bounds.size.width, size.height);
+    
+    CGSize size = [self.textView sizeThatFits:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    NSLog(@"self:%@,size:%@",NSStringFromCGRect(self.frame),NSStringFromCGSize(size));
+    return CGSizeMake(size.width, size.height);
 }
 
 
